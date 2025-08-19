@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kowshik S | Cloud & DevOps Enthusiast</title>
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;scroll-behavior:smooth;}
+    body{background:#0f172a;color:white;overflow-x:hidden;position:relative;}
+
+    /* Gradient background */
+    body::before{
+      content:"";position:fixed;top:0;left:0;width:100%;height:100%;
+      background:linear-gradient(270deg,#0f172a,#1e3a8a,#312e81,#0f172a);
+      background-size:800% 800%;z-index:-4;
+      animation:gradientBG 30s ease infinite;
+    }
+    @keyframes gradientBG{
+      0%{background-position:0% 50%;}
+      50%{background-position:100% 50%;}
+      100%{background-position:0% 50%;}
+    }
+
+    /* Aurora */
+    .aurora{
+      position:fixed;top:-50%;left:-50%;width:200%;height:200%;
+      background:conic-gradient(from 180deg,rgba(56,189,248,0.2),rgba(99,102,241,0.3),rgba(236,72,153,0.2),rgba(56,189,248,0.2));
+      animation:rotateAurora 25s linear infinite;
+      filter:blur(200px);z-index:-3;
+    }
+    @keyframes rotateAurora{from{transform:rotate(0deg);}to{transform:rotate(360deg);} }
+
+    /* Particle canvas */
+    #particles{
+      position:fixed;top:0;left:0;width:100%;height:100%;
+      z-index:-2;pointer-events:none;
+    }
+
+    /* Flying characters */
+    .floating-char{
+      position:fixed;
+      font-size:1.2rem;
+      font-weight:bold;
+      color:#38bdf8;
+      opacity:0.7;
+      animation:floatChar linear infinite;
+      pointer-events:none;
+      text-shadow:0 0 10px #38bdf8, 0 0 20px #38bdf8;
+      z-index:-1;
+    }
+    @keyframes floatChar{
+      from{transform:translateY(110vh) rotate(0deg);opacity:0;}
+      10%{opacity:0.8;}
+      to{transform:translateY(-20vh) rotate(360deg);opacity:0;}
+    }
+
+    /* Navbar */
+    nav{display:flex;justify-content:space-between;align-items:center;padding:1rem 2rem;
+        background:rgba(15,23,42,0.6);backdrop-filter:blur(6px);position:sticky;top:0;z-index:100;}
+    nav h2{color:#38bdf8;}
+    nav ul{list-style:none;display:flex;gap:20px;}
+    nav ul li a{color:white;text-decoration:none;transition:.3s;position:relative;}
+    nav ul li a::after{content:"";position:absolute;width:0;height:2px;background:#38bdf8;left:0;bottom:-5px;transition:.4s;}
+    nav ul li a:hover{color:#38bdf8;}
+    nav ul li a:hover::after{width:100%;}
+
+    /* Hero */
+    .hero{position:relative;height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;}
+    .hero-content{position:relative;z-index:3;display:flex;flex-direction:column;align-items:center;gap:20px;}
+    .profile-img{width:160px;height:160px;border-radius:50%;border:3px solid #38bdf8;
+      box-shadow:0 0 40px #38bdf8;animation:floatImg 6s ease-in-out infinite;}
+    @keyframes floatImg{0%{transform:translateY(0);}50%{transform:translateY(-20px);}100%{transform:translateY(0);} }
+    h1{font-size:2.5rem;position:relative;text-shadow:0 0 15px #38bdf8;}
+    h1::after{content:"";position:absolute;top:0;left:-50%;width:50%;height:100%;
+      background:linear-gradient(120deg,transparent,rgba(255,255,255,0.8),transparent);
+      animation:shine 3s infinite;}
+    @keyframes shine{0%{left:-50%;}100%{left:150%;}}
+    .typing{font-size:1.3rem;border-right:2px solid white;white-space:nowrap;overflow:hidden;}
+    .socials{display:flex;gap:20px;justify-content:center;}
+    .socials a img{width:42px;height:42px;transition:.3s;}
+    .socials a img:hover{transform:scale(1.4);filter:drop-shadow(0 0 15px #38bdf8);}
+
+    /* Sections */
+    section{padding:5rem 2rem;text-align:center;max-width:1000px;margin:auto;
+      opacity:0;transform:translateY(60px);transition:all 1s;}
+    section.show{opacity:1;transform:translateY(0);}
+    section h2{color:#38bdf8;margin-bottom:1rem;font-size:2rem;position:relative;}
+    section h2::after{content:"";display:block;width:80px;height:3px;background:#38bdf8;
+      margin:0.5rem auto;box-shadow:0 0 15px #38bdf8;}
+
+    .skills{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:1.5rem;}
+    .skill{background:#2563eb;padding:10px 20px;border-radius:20px;transition:.3s;cursor:pointer;}
+    .skill:hover{background:#38bdf8;transform:scale(1.2) rotate(5deg);box-shadow:0 0 20px #38bdf8;}
+
+    .project-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:25px;margin-top:1.5rem;}
+    .card{padding:1.5rem;background:rgba(255,255,255,0.05);border-radius:10px;
+      box-shadow:0 4px 15px rgba(0,0,0,0.3);transition:.5s;cursor:pointer;}
+    .card:hover{transform:translateY(-10px) scale(1.05) rotate(-1deg);
+      background:rgba(255,255,255,0.1);box-shadow:0 0 20px #38bdf8;}
+
+    .cert-container{display:flex;flex-wrap:wrap;gap:25px;justify-content:center;margin-top:1.5rem;}
+    .cert{flex:1 1 300px;padding:20px;border-radius:10px;background:rgba(255,255,255,0.08);
+          box-shadow:0 4px 10px rgba(0,0,0,0.3);transition:.3s;}
+    .cert:hover{transform:scale(1.05) rotate(1deg);box-shadow:0 0 25px #38bdf8;}
+    .cert a{color:#38bdf8;font-weight:bold;text-decoration:none;}
+
+    .contact form{max-width:450px;margin:auto;display:flex;flex-direction:column;gap:12px;margin-top:1.5rem;}
+    .contact input,.contact textarea{padding:12px;border:1px solid #444;border-radius:6px;background:#1e293b;color:white;}
+    .contact button{background:#3b82f6;padding:12px;border:none;border-radius:6px;cursor:pointer;transition:.3s;}
+    .contact button:hover{background:#2563eb;box-shadow:0 0 15px #38bdf8;}
+
+    footer{background:#111827;color:#bbb;text-align:center;padding:1rem;margin-top:2rem;}
+
+    /* Cursor trail */
+    .cursor-dot{position:fixed;width:8px;height:8px;border-radius:50%;background:#38bdf8;
+      pointer-events:none;animation:fadeOut 1s forwards;}
+    @keyframes fadeOut{to{opacity:0;transform:scale(0.5);}}
+  </style>
+</head>
+<body>
+  <div class="aurora"></div>
+  <canvas id="particles"></canvas>
+
+  <nav>
+    <h2>Kowshik S</h2>
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#certifications">Certifications</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <section id="home" class="hero">
+    <div class="hero-content">
+      <img src="https://avatars.githubusercontent.com/u/172812112?s=400&v=4" class="profile-img" alt="Kowshik">
+      <h1>Hello, I'm Kowshik S</h1>
+      <p class="typing" id="typing"></p>
+      <div class="socials">
+        <a href="mailto:koushiksaravanan2003@gmail.com"><img src="https://cdn-icons-png.flaticon.com/512/732/732200.png"></a>
+        <a href="https://www.linkedin.com/in/kowshiks2003/"><img src="https://cdn-icons-png.flaticon.com/512/174/174857.png"></a>
+        <a href="https://github.com/kowshiks2003"><img src="https://cdn-icons-png.flaticon.com/512/733/733609.png"></a>
+        <a href="https://medium.com/@koushiksaravanan2003"><img src="https://cdn-icons-png.flaticon.com/512/5968/5968906.png"></a>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <h2>👨‍💻 About Me</h2>
+    <p>I am a passionate Cloud & DevOps enthusiast with AWS certifications, pursuing B.Tech in Information Technology. Skilled in cloud infrastructure, automation, and CI/CD pipelines.</p>
+    <div class="skills">
+      <div class="skill">AWS</div><div class="skill">Docker</div><div class="skill">Jenkins</div>
+      <div class="skill">Terraform</div><div class="skill">Linux</div><div class="skill">Python</div><div class="skill">SQL</div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <h2>🚀 Projects</h2>
+    <div class="project-grid">
+      <div class="card"><h3>Hotel Booking Chatbot</h3><p>WhatsApp chatbot with AWS Lex, Lambda, DynamoDB, Twilio.</p></div>
+      <div class="card"><h3>CI/CD Pipeline</h3><p>Jenkins, GitHub, Docker, SonarQube for automated deployments.</p></div>
+    </div>
+  </section>
+
+  <section id="certifications">
+    <h2>🎓 Certifications</h2>
+    <div class="cert-container">
+      <div class="cert"><h3>AWS Solutions Architect Associate</h3>
+        <a href="https://www.credly.com/badges/a19ed256-b43f-49a7-8ecf-473bfb00d58f/public_url">🔗 Verify</a></div>
+      <div class="cert"><h3>AWS Cloud Practitioner</h3>
+        <a href="https://www.credly.com/badges/f3bfb127-2e38-4c81-8571-49695eba5cd3/linked_in_profile">🔗 Verify</a></div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <h2>📩 Contact Me</h2>
+    <form onsubmit="event.preventDefault();alert('✅ Message Sent!');">
+      <input type="text" placeholder="Your Name" required>
+      <input type="email" placeholder="Your Email" required>
+      <textarea placeholder="Your Message" rows="4" required></textarea>
+      <button type="submit">Send</button>
+    </form>
+  </section>
+
+  <footer>© 2025 Kowshik S | Built with ❤️ using AWS S3 + CloudFront</footer>
+
+  <script>
+    // Typing effect
+    const words=["Cloud & DevOps Enthusiast","AWS Certified Solutions Architect","CI/CD Automation Specialist"];
+    let i=0,j=0,current="",el=document.getElementById("typing");
+    function type(){if(j<words[i].length){current+=words[i][j];el.textContent=current;j++;setTimeout(type,100);}
+      else setTimeout(erase,1500);}
+    function erase(){if(j>0){current=current.slice(0,-1);el.textContent=current;j--;setTimeout(erase,50);}
+      else{i=(i+1)%words.length;setTimeout(type,500);}}
+    type();
+
+    // Particles
+    const canvas=document.getElementById("particles"),ctx=canvas.getContext("2d");
+    canvas.width=innerWidth;canvas.height=innerHeight;let arr=[];
+    class P{constructor(){this.x=Math.random()*canvas.width;this.y=Math.random()*canvas.height;this.s=2;this.vx=(Math.random()-0.5);this.vy=(Math.random()-0.5);}
+      u(){this.x+=this.vx;this.y+=this.vy;if(this.x<0||this.x>canvas.width)this.vx*=-1;if(this.y<0||this.y>canvas.height)this.vy*=-1;}
+      d(){ctx.beginPath();ctx.arc(this.x,this.y,this.s,0,Math.PI*2);ctx.fillStyle="rgba(56,189,248,0.8)";ctx.fill();}}
+    function init(){arr=[];for(let i=0;i<100;i++)arr.push(new P());}
+    function connect(){for(let a=0;a<arr.length;a++){for(let b=a;b<arr.length;b++){let dx=arr[a].x-arr[b].x,dy=arr[a].y-arr[b].y,dist=Math.sqrt(dx*dx+dy*dy);
+      if(dist<120){ctx.strokeStyle="rgba(56,189,248,"+(1-dist/120)+")";ctx.beginPath();ctx.moveTo(arr[a].x,arr[a].y);ctx.lineTo(arr[b].x,arr[b].y);ctx.stroke();}}}}
+    function animate(){ctx.clearRect(0,0,canvas.width,canvas.height);arr.forEach(p=>{p.u();p.d();});connect();requestAnimationFrame(animate);}
+    init();animate();
+    addEventListener("resize",()=>{canvas.width=innerWidth;canvas.height=innerHeight;init();});
+
+    // Scroll reveal
+    const secs=document.querySelectorAll("section");
+    function reveal(){secs.forEach(s=>{let r=s.getBoundingClientRect();if(r.top<innerHeight-100)s.classList.add("show");});}
+    addEventListener("scroll",reveal);addEventListener("load",reveal);
+
+    // Cursor trail
+    document.addEventListener("mousemove",e=>{
+      const dot=document.createElement("div");
+      dot.className="cursor-dot";dot.style.left=`${e.pageX}px`;dot.style.top=`${e.pageY}px`;
+      document.body.appendChild(dot);
+      setTimeout(()=>dot.remove(),1000);
+    });
+
+    // Flying characters
+    const chars=["☁","AWS","⚡","DevOps","💻","CI/CD","🐳","IaC"];
+    function spawnChar(){
+      const span=document.createElement("span");
+      span.className="floating-char";
+      span.textContent=chars[Math.floor(Math.random()*chars.length)];
+      span.style.left=Math.random()*100+"vw";
+      span.style.animationDuration=(8+Math.random()*5)+"s";
+      document.body.appendChild(span);
+      setTimeout(()=>span.remove(),15000);
+    }
+    setInterval(spawnChar,1200);
+  </script>
+</body>
+</html>
+
